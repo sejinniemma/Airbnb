@@ -24,19 +24,19 @@ export default function Main() {
   const [propertyType, setPropertyType] = useState('');
   const [bedrooms, setBedrooms] = useState('');
   const [listings, setListings] = useState([]);
-  const [filteredProperties, setFilteredProperties] =
-    useState(initialProperties);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filtered = initialProperties.filter((property) => {
+    const filtered = listings.filter((property) => {
       return (
-        property.location.toLowerCase().includes(location.toLowerCase()) &&
-        (propertyType === '' || property.type === propertyType) &&
+        property.address?.street
+          .toLowerCase()
+          .includes(location.toLowerCase()) &&
+        (propertyType === '' || property.property_type === propertyType) &&
         (bedrooms === '' || property.bedrooms === Number(bedrooms))
       );
     });
-    setFilteredProperties(filtered);
+    setListings(filtered);
   };
 
   useEffect(() => {
@@ -121,35 +121,50 @@ export default function Main() {
           ))}
         </TextField>
 
-        <Button type='submit' variant='contained' color='primary'>
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          sx={{ mt: 2 }}
+        >
           Search
         </Button>
       </form>
 
       <Grid container spacing={2} style={{ marginTop: '20px' }}>
-        {filteredProperties.map((property) => (
-          <Grid item xs={12} sm={6} md={4} key={property.id}>
-            <Card>
-              <CardContent>
-                <Typography variant='h6'>
-                  <Link
-                    to={`/bookings/${property.listing_id}`}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
+        {listings &&
+          listings.map((property, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card>
+                <CardContent>
+                  <Typography variant='h6'>
+                    <Link
+                      to={`/bookings/${property._id}`}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'inherit',
+                        fontFamily: 'Pretendard',
+                      }}
+                    >
+                      {property?.address?.street}
+                    </Link>
+                  </Typography>
+                  <Typography
+                    color='textSecondary'
+                    sx={{ fontFamily: 'Pretendard' }}
                   >
-                    {property.name}
-                  </Link>
-                </Typography>
-                <Typography color='textSecondary'>
-                  {property.summary}
-                </Typography>
-                <Typography>Daily Price: ${property.dailyPrice}</Typography>
-                <Typography>
-                  Rating: {property.review_scores.review_scores_rating}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+                    {property.summary}
+                  </Typography>
+                  <Typography sx={{ fontFamily: 'Pretendard-Medium' }}>
+                    Daily Price: ${property?.price['$numberDecimal']}
+                  </Typography>
+                  <Typography sx={{ fontFamily: 'Pretendard-Medium' }}>
+                    Rating: {property?.review_scores?.review_scores_rating}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );
