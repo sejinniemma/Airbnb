@@ -1,13 +1,22 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Pretendard';
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.slick-slider-container {
+  height: 400px; /* Set your desired height */
+  overflow: hidden; /* Hide overflow */
+}
+
+.slick-slide-image {
+  width: 100%;
+  height: 100%; /* Ensure the image takes full height */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 8px; /* Rounded corners */
+  transition: transform 0.5s ease; /* Smooth transition for scaling */
+}
+
+/* Optional: Add some hover effect for the image */
+.slick-slide-image:hover {
+  transform: scale(1.05); /* Scale up the image slightly on hover */
 }
