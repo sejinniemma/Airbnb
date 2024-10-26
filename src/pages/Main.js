@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   TextField,
@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { FaAirbnb } from 'react-icons/fa';
 import { useTheme } from '@emotion/react';
 import Slick from '../components/Slick';
+import axios from 'axios';
 // Property types for the dropdown
 const propertyTypes = ['Apartment', 'House', 'Villa', 'Studio', 'Penthouse'];
 
@@ -22,6 +23,7 @@ export default function Main() {
   const [location, setLocation] = useState('');
   const [propertyType, setPropertyType] = useState('');
   const [bedrooms, setBedrooms] = useState('');
+  const [listings, setListings] = useState([]);
   const [filteredProperties, setFilteredProperties] =
     useState(initialProperties);
 
@@ -37,6 +39,20 @@ export default function Main() {
     setFilteredProperties(filtered);
   };
 
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/listings');
+        setListings(response.data);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  console.log(`listings =>`, listings && listings);
   return (
     <Container maxWidth='lg'>
       <Stack alignItems='center' justifyContent='center' flexDirection='row'>
