@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Pretendard';
+  font-display: swap; /* 'swap' is often better than 'fallback' for web fonts */
+  src: url('/src/utils/fonts/Pretendard-Light.woff2') format('woff2'),
+    /* Modern browsers */ url('/src/utils/fonts/Pretendard-Light.woff')
+      format('woff'),
+    /* Older browsers */ url('/src/utils/fonts/Pretendard.ttf')
+      format('truetype'); /* TTF fallback */
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Semibold';
+  font-display: swap; /* Improved performance with swap */
+  src: url('/src/utils/fonts/Pretendard-SemiBold.woff2') format('woff2'),
+    /* Modern browsers */ url('/src/utils/fonts/Pretendard-SemiBold.woff')
+      format('woff'),
+    /* Older browsers */ url('/src/utils/fonts/Pretendard-SemiBold.ttf')
+      format('truetype'); /* TTF fallback */
+  font-weight: 600; /* Typically, Semibold is around 600 weight */
+  font-style: normal;
+}
+
+/* Pretendard-Medium */
+@font-face {
+  font-family: 'Pretendard-Medium';
+  font-display: swap;
+  src: url('/src/utils/fonts/Pretendard-Medium.woff2') format('woff2'),
+    /* Modern browsers */ url('/src/utils/fonts/Pretendard-Medium.woff')
+      format('woff'),
+    /* Older browsers */ url('/src/utils/fonts/Pretendard-Medium.ttf')
+      format('truetype'); /* TTF fallback */
+  font-weight: 500; /* Medium weight is typically around 500 */
+  font-style: normal;
+}
