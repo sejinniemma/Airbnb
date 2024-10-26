@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Pretendard';
+  height: '100vh';
 }
 
 .slick-slider-container {
@@ -19,4 +20,25 @@ body {
 /* Optional: Add some hover effect for the image */
 .slick-slide-image:hover {
   transform: scale(1.05); /* Scale up the image slightly on hover */
+}
+
+/* Booking.css */
+.booking-container {
+  position: relative;
+  background-image: url('/images/1.jpg'); /* Update with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full height */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

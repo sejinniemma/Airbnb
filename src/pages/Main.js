@@ -117,7 +117,7 @@ export default function Main() {
               <CardContent>
                 <Typography variant='h6'>
                   <Link
-                    to={`/bookings.html?listing_id=${property.listing_id}`}
+                    to={`/bookings/${property.listing_id}`}
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {property.name}

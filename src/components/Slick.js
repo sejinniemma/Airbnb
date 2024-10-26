@@ -3,7 +3,6 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import React from 'react';
 import Slider from 'react-slick';
-import { height } from '@mui/system';
 
 export default function Slick() {
   const sliderSettings = {
