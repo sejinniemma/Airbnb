@@ -9,7 +9,7 @@ const routes = [
     element: <Main />,
   },
   {
-    path: '/bookings/:listingId',
+    path: '/bookings/:listing_id',
     element: <Booking />,
   },
   {

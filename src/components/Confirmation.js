@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Confirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { listingId, clientName } = location.state || {};
+  const { listing_id, clientName } = location.state || {};
 
   return (
     <Container maxWidth='sm'>
@@ -15,7 +15,7 @@ const Confirmation = () => {
       </Typography>
       <Typography variant='h6'>Thank you, {clientName}!</Typography>
       <Typography>
-        Your booking for Listing ID: {listingId} has been confirmed.
+        Your booking for Listing ID: {listing_id} has been confirmed.
       </Typography>
       <Button variant='contained' color='primary' onClick={() => navigate('/')}>
         Go to Homepage

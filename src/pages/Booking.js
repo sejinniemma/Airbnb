@@ -2,28 +2,58 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Stack } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Booking = () => {
-  const { listingId } = useParams(); // Extract listingId from URL params
+  const { listing_id } = useParams(); // Extract listing_id from URL params
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [clientName, setClientName] = useState('');
+  const [arrival_date, setArrival_date] = useState('');
+  const [departure_date, setDeparture_date] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [mobile, setMobile] = useState('');
   const [postalAddress, setPostalAddress] = useState('');
   const [homeAddress, setHomeAddress] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        'http://localhost:5001/bookings',
+        {
+          listing_id,
+          arrival_date,
+          departure_date,
+          name,
+          phone,
+          mobile,
+          postalAddress,
+          homeAddress,
+          email,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    // Logic to save the booking data goes here
-    // Example: API call to save booking data
-
-    // Redirect to confirmation page after submission
-    navigate('/booking-confirmation', { state: { listingId, clientName } });
+      // 요청이 성공적일 때 처리
+      if (response.status === 201) {
+        console.log('Booking saved:', response.data);
+        navigate('/booking-confirmation', {
+          state: { listing_id, clientName: name },
+        });
+      } else {
+        console.error('Failed to save booking');
+        alert('Failed to save booking');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
   };
 
   return (
@@ -48,7 +78,7 @@ const Booking = () => {
           sx={{ fontFamily: 'Pretendard-Medium', fontSize: '40px' }}
           gutterBottom
         >
-          Booking for Listing ID: {listingId}
+          Booking for Listing ID: {listing_id}
         </Typography>
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
@@ -56,8 +86,8 @@ const Booking = () => {
               label='Start Date'
               type='date'
               required
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              value={arrival_date}
+              onChange={(e) => setArrival_date(e.target.value)}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -66,8 +96,8 @@ const Booking = () => {
               label='End Date'
               type='date'
               required
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              value={departure_date}
+              onChange={(e) => setDeparture_date(e.target.value)}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -75,8 +105,8 @@ const Booking = () => {
             <TextField
               label='Client Name'
               required
-              value={clientName}
-              onChange={(e) => setClientName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               label='Email Address'
